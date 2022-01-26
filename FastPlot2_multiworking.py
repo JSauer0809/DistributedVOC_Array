@@ -1,8 +1,10 @@
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
-import qwiic_sgp40
-import qwiic
-my_sgp40 = qwiic_sgp40.QwiicSGP40()
+#This program is designed for a raspberry PI, connected through an 8 channel I2C multiplexer (TCA9548A) to 8 SGP40 VOC sensors. 
+#It simulataneously plots 8 time series of VOC intensity data from the sensors using blitting to keep the refresh rate on the console quick. 
+import matplotlib.pyplot as plt #import plotting library
+import matplotlib.animation as animation #import animation library
+import qwiic_sgp40 #import SGP40 VOC Sensor Library
+import qwiic #import library for I2C functions
+my_sgp40 = qwiic_sgp40.QwiicSGP40() 
 test = qwiic.QwiicTCA9548A()
 # Parameters
 x_len = 200         # Number of points to display
@@ -11,8 +13,8 @@ y_range = [25000, 34000]  # Range of possible Y values to display
 # Create figure for plotting
 fig = plt.figure()
 ax = fig.add_subplot(1, 1, 1)
-xs = list(range(0, 200))
-ys = [0] * x_len
+xs = list(range(0, 200)) #generate x axis for plot
+ys = [0] * x_len #generate 8 arrays of x_length filled with 0 
 ys2 = [0] * x_len
 ys3 = [0] * x_len
 ys4 = [0] * x_len
@@ -21,7 +23,7 @@ ys6 = [0] * x_len
 ys7 = [0] * x_len
 ys8 = [0] * x_len
 
-ax.set_ylim(y_range)
+ax.set_ylim(y_range) #Set range of yaxis
 
 # Create a blank line. We will update the line in animate
 line, = ax.plot(xs, ys)
